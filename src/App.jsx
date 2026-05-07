@@ -10,7 +10,7 @@ const App = () => {
   return (
     <div>
       {/* <Home/> */}
-       <LanguageSwitcher />
+       {/* <LanguageSwitcher /> */}
       <Home/>
     </div>
   )
