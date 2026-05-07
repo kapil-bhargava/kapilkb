@@ -1,1 +1,39 @@
 @import 'tailwindcss';
+
+/* Hide Google Translate Banner */
+.goog-te-banner-frame.skiptranslate {
+  display: none !important;
+}
+body {
+  top: 0px !important;
+}
+.goog-te-gadget {
+  font-size: 0px !important;
+}
+.goog-logo-link {
+  display: none !important;
+}
+.goog-te-combo {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  background: white;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* Prevent Google Translate from duplicating content */
+.goog-text-highlight {
+  background: none !important;
+  box-shadow: none !important;
+}
+
+/* Hide the original text after translation */
+.translated-text {
+  display: none !important;
+}
+
+/* Fix for React + Google Translate duplication bug */
+body {
+  -webkit-text-size-adjust: none;
+}

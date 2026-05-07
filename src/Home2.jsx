@@ -256,8 +256,13 @@ export default function Home() {
     : studentProjects;
 
   const scrollToSection = (id) => {
+    // alert(id);
     document.getElementById(id.toLowerCase())?.scrollIntoView({ behavior: 'smooth' });
-    setIsMenuOpen(false);
+    // setTimeout(() => setIsMenuOpen(false), 300);
+
+    // if(window.innerWidth < 768) {
+    //   setIsMenuOpen(false);
+    // }
   };
 
   const handleSubmit = (e) => {
