@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence  } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   FaGithub, FaInstagram, FaLinkedin, FaWhatsapp, FaEnvelope,
   FaArrowRight, FaBars, FaTimes, FaCode, FaUsers, FaLaptopCode,
@@ -11,6 +11,7 @@ import {
   SiGooglemeet, SiMongodb, SiExpress, SiReact, SiNodedotjs, SiTailwindcss
 } from 'react-icons/si';
 import mypic from './assets/mypic.png';
+import { s } from 'framer-motion/client';
 
 /* ─────────────────────────────────────────────────────────────
    NEON GLOW HELPERS  (inline styles keep Tailwind JIT happy)
@@ -32,20 +33,22 @@ const personalProjects = [
   {
     title: 'ZN ERP',
     description: 'Complete student management system with attendance tracking, grade management, course enrollment, and fee collection for ZN Infotech.',
-    tech: ['MERN', 'Tailwind CSS', 'MongoDB', 'JWT'],
+    tech: ['MERN', 'Tailwind CSS', 'MongoDB', 'JWT', 'Cloudinary', 'recharts'],
     link: 'https://zn-erp.vercel.app',
     deployed: true,
     category: 'personal',
+    studentName: 'Self',
     year: '2025',
   },
   {
-    title: 'All India PES',
-    description: 'Professional examination platform for competitive tests with real-time results, analytics dashboard, and certificate generation.',
-    tech: ['React', 'Node.js', 'PostgreSQL', 'Chart.js'],
+    title: 'A.I.P.E.S',
+    description: 'AllIndiapes – All India Patrakar Ekta Sangh, connecting journalists nationwide through trusted news, media collaboration, and digital press services.   ',
+    tech: ['React', 'Node.js', 'Tailwind CSS'],
     link: 'https://allindiapes.vercel.app',
     deployed: true,
     category: 'personal',
-    year: '2025',
+    studentName: 'Self',
+    year: '2026',
   },
   {
     title: 'Learning Resources',
@@ -54,6 +57,7 @@ const personalProjects = [
     link: 'https://resources-lyart-eight.vercel.app/',
     deployed: true,
     category: 'personal',
+    studentName: 'Self',
     year: '2024',
   },
 ];
@@ -63,10 +67,10 @@ const studentProjects = [
     title: 'Safargo',
     description: 'Uber clone with real-time ride booking, driver tracking, fare calculation, and admin dashboard.',
     tech: ['React', 'Node.js', 'Socket.io', 'MongoDB'],
+    studentName: 'Shashikant Mishra',
     link: 'https://safargo.vercel.app/',
     deployed: true,
     category: 'student',
-    studentName: 'Final Year Project',
     year: '2025',
   },
   {
@@ -76,7 +80,7 @@ const studentProjects = [
     link: '#',
     deployed: false,
     category: 'student',
-    studentName: 'Team Project',
+    studentName: 'Akshat Sinha',
     year: '2025',
   },
   {
@@ -86,8 +90,18 @@ const studentProjects = [
     link: '#',
     deployed: false,
     category: 'student',
-    studentName: 'Major Project',
-    year: '2024',
+    studentName: 'Adarsh',
+    year: '2025',
+  },
+  {
+    title: 'Veridia (Hiring Platform)',
+    description: 'Professional company-based hiring platform for posting job openings, managing applications, tracking candidate status, and streamlining recruitment workflows.',
+    tech: ['React', 'Node.js', 'Express', 'MongoDB'],
+    link: '#',
+    deployed: false,
+    category: 'student',
+    studentName: 'Satyam Kumar',
+    year: '2026',
   },
   {
     title: 'Hospital Management',
@@ -96,8 +110,8 @@ const studentProjects = [
     link: '#',
     deployed: false,
     category: 'student',
-    studentName: 'Team Project',
-    year: '2024',
+    studentName: 'Satyam Kumar',
+    year: '2025',
   },
   {
     title: 'Hostel Management',
@@ -106,7 +120,7 @@ const studentProjects = [
     link: '#',
     deployed: false,
     category: 'student',
-    studentName: 'Group Project',
+    studentName: 'Mohd Saqib',
     year: '2024',
   },
   {
@@ -116,8 +130,8 @@ const studentProjects = [
     link: '#',
     deployed: false,
     category: 'student',
-    studentName: 'Individual Project',
-    year: '2025',
+    studentName: '10+ Students',
+    year: '2024',
   },
   {
     title: 'Food Delivery App',
@@ -126,25 +140,25 @@ const studentProjects = [
     link: '#',
     deployed: false,
     category: 'student',
-    studentName: 'Final Year Project',
+    studentName: '3+ Students',
     year: '2025',
   },
 ];
 
 const skills = [
-  { name: 'MongoDB',    Icon: SiMongodb,     color: '#22c55e' },
-  { name: 'Express.js', Icon: SiExpress,     color: '#94a3b8' },
-  { name: 'React',      Icon: SiReact,       color: '#22d3ee' },
-  { name: 'Node.js',    Icon: SiNodedotjs,   color: '#22c55e' },
-  { name: 'Tailwind',   Icon: SiTailwindcss, color: '#22d3ee' },
-  { name: 'Python',     Icon: FaCode,        color: '#60a5fa' },
+  { name: 'MongoDB', Icon: SiMongodb, color: '#22c55e' },
+  { name: 'Express.js', Icon: SiExpress, color: '#94a3b8' },
+  { name: 'React', Icon: SiReact, color: '#22d3ee' },
+  { name: 'Node.js', Icon: SiNodedotjs, color: '#22c55e' },
+  { name: 'Tailwind', Icon: SiTailwindcss, color: '#22d3ee' },
+  { name: 'Python', Icon: FaCode, color: '#60a5fa' },
 ];
 
 const stats = [
-  { Icon: FaUsers,       value: '50+',  label: 'Students Trained' },
-  { Icon: SiGooglemeet,  value: '200+', label: 'Online Sessions' },
-  { Icon: FaLaptopCode,  value: '7+',   label: 'Student Projects' },
-  { Icon: FaAward,       value: '100%', label: 'Satisfaction Rate' },
+  { Icon: FaUsers, value: '50+', label: 'Students Trained' },
+  { Icon: SiGooglemeet, value: '200+', label: 'Online Sessions' },
+  { Icon: FaLaptopCode, value: '7+', label: 'Student Projects' },
+  { Icon: FaAward, value: '100%', label: 'Satisfaction Rate' },
 ];
 
 /* ─────────────────────────────────────────────────────────────
@@ -236,12 +250,12 @@ function FadeUp({ children, delay = 0, className = '' }) {
    MAIN COMPONENT
 ───────────────────────────────────────────────────────────── */
 export default function Home() {
-  const [isMenuOpen, setIsMenuOpen]     = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState('all');
-  const [formData, setFormData]         = useState({ name: '', email: '', message: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
-  const [scrolled, setScrolled]         = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 50);
@@ -251,9 +265,9 @@ export default function Home() {
 
   const allProjects = [...personalProjects, ...studentProjects];
   const filteredProjects =
-    activeCategory === 'all'      ? allProjects
-    : activeCategory === 'personal' ? personalProjects
-    : studentProjects;
+    activeCategory === 'all' ? allProjects
+      : activeCategory === 'personal' ? personalProjects
+        : studentProjects;
 
   const scrollToSection = (id) => {
     // alert(id);
@@ -291,11 +305,10 @@ export default function Home() {
 
       {/* ══════════════════════ NAVBAR ══════════════════════ */}
       <nav
-        className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
-          scrolled
+        className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${scrolled
             ? 'bg-gray-900/80 backdrop-blur-xl border-b border-indigo-500/10'
             : 'bg-transparent'
-        }`}
+          }`}
         style={{ boxShadow: scrolled ? '0 4px 30px rgba(0,0,0,0.4)' : 'none' }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10">
@@ -463,10 +476,10 @@ export default function Home() {
               {/* Social icons */}
               <div className="flex items-center gap-5">
                 {[
-                  { href: 'https://github.com/kapil-bhargava',                    Icon: FaGithub,   hoverClass: 'hover:text-white' },
-                  { href: 'https://www.instagram.com/zn_infotech/',               Icon: FaInstagram, hoverClass: 'hover:text-pink-400' },
+                  { href: 'https://github.com/kapil-bhargava', Icon: FaGithub, hoverClass: 'hover:text-white' },
+                  { href: 'https://www.instagram.com/zn_infotech/', Icon: FaInstagram, hoverClass: 'hover:text-pink-400' },
                   { href: 'https://www.linkedin.com/in/kapil-bhargava-zninfotech/', Icon: FaLinkedin, hoverClass: 'hover:text-blue-400' },
-                  { href: 'https://wa.me/919565017342',                           Icon: FaWhatsapp, hoverClass: 'hover:text-green-400' },
+                  { href: 'https://wa.me/919565017342', Icon: FaWhatsapp, hoverClass: 'hover:text-green-400' },
                 ].map(({ href, Icon, hoverClass }) => (
                   <a
                     key={href}
@@ -696,18 +709,17 @@ export default function Home() {
           {/* Category filters */}
           <div className="flex justify-center flex-wrap gap-3 mb-10">
             {[
-              { id: 'all',      label: 'All Projects',     Icon: FaCode },
+              { id: 'all', label: 'All Projects', Icon: FaCode },
               { id: 'personal', label: 'Personal / Client', Icon: FaBriefcase },
-              { id: 'student',  label: 'Student Projects',  Icon: FaUserGraduate },
+              { id: 'student', label: 'Student Projects', Icon: FaUserGraduate },
             ].map(({ id, label, Icon }) => (
               <button
                 key={id}
                 onClick={() => setActiveCategory(id)}
-                className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-200 ${
-                  activeCategory === id
+                className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-200 ${activeCategory === id
                     ? 'bg-indigo-600 text-white'
                     : 'bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-gray-200'
-                }`}
+                  }`}
                 style={activeCategory === id ? { boxShadow: GLOW.indigo } : {}}
               >
                 <Icon size={14} />
@@ -738,7 +750,7 @@ export default function Home() {
                       style={{ background: 'linear-gradient(135deg, rgba(99,102,241,0.4) 0%, rgba(168,85,247,0.4) 100%)' }} />
                     <FaLaptopCode
                       className="text-5xl text-indigo-300/40 group-hover:text-indigo-300/70 transition-all duration-300 group-hover:scale-110 relative z-10"
-                    />
+                      />
                     {/* Year badge */}
                     <span className="absolute top-3 left-3 text-xs text-indigo-300/70 font-mono bg-indigo-900/40 px-2 py-0.5 rounded-full border border-indigo-500/20">
                       {project.year}
@@ -762,6 +774,12 @@ export default function Home() {
                     <h3 className="text-base sm:text-lg font-bold mb-2 group-hover:text-indigo-300 transition-colors">
                       {project.title}
                     </h3>
+                    {/* student name  */}
+                    {project.studentName && (
+                      <p className="text-xs text-indigo-400 mb-2">
+                        by <span className="font-medium">{project.studentName}</span>
+                      </p>
+                    )}
                     <p className="text-gray-400 text-xs sm:text-sm leading-relaxed mb-4 flex-1">
                       {project.description}
                     </p>
@@ -789,11 +807,10 @@ export default function Home() {
                       target={project.deployed ? '_blank' : '_self'}
                       rel="noopener noreferrer"
                       onClick={(e) => !project.deployed && e.preventDefault()}
-                      className={`inline-flex items-center gap-1.5 text-xs font-semibold transition-colors ${
-                        project.deployed
+                      className={`inline-flex items-center gap-1.5 text-xs font-semibold transition-colors ${project.deployed
                           ? 'text-indigo-400 hover:text-indigo-300'
                           : 'text-gray-600 cursor-not-allowed'
-                      }`}
+                        }`}
                     >
                       {project.deployed ? (
                         <>Live Demo <FaExternalLinkAlt size={10} /></>
@@ -916,8 +933,8 @@ export default function Home() {
                   <h4 className="text-sm font-semibold text-gray-400 mb-4 uppercase tracking-wider">Follow Me</h4>
                   <div className="flex gap-4">
                     {[
-                      { href: 'https://github.com/kapil-bhargava',                     Icon: FaGithub,   hover: 'hover:text-white' },
-                      { href: 'https://www.instagram.com/zn_infotech/',                Icon: FaInstagram, hover: 'hover:text-pink-400' },
+                      { href: 'https://github.com/kapil-bhargava', Icon: FaGithub, hover: 'hover:text-white' },
+                      { href: 'https://www.instagram.com/zn_infotech/', Icon: FaInstagram, hover: 'hover:text-pink-400' },
                       { href: 'https://www.linkedin.com/in/kapil-bhargava-zninfotech/', Icon: FaLinkedin, hover: 'hover:text-blue-400' },
                     ].map(({ href, Icon, hover }) => (
                       <a
@@ -952,8 +969,8 @@ export default function Home() {
                   )}
 
                   {[
-                    { type: 'text',  name: 'name',    placeholder: 'Your Name' },
-                    { type: 'email', name: 'email',   placeholder: 'Your Email' },
+                    { type: 'text', name: 'name', placeholder: 'Your Name' },
+                    { type: 'email', name: 'email', placeholder: 'Your Email' },
                   ].map(({ type, name, placeholder }) => (
                     <input
                       key={name}
