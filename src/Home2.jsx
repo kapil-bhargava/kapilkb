@@ -5,13 +5,12 @@ import {
   FaArrowRight, FaBars, FaTimes, FaCode, FaUsers, FaLaptopCode,
   FaExternalLinkAlt, FaUserGraduate, FaBriefcase, FaGraduationCap,
   FaCalendarAlt, FaMapMarkerAlt, FaChalkboardTeacher, FaVideo,
-  FaHeart, FaQuoteLeft, FaAward
+  FaHeart, FaQuoteLeft, FaAward, FaBuilding, FaClock
 } from 'react-icons/fa';
 import {
   SiGooglemeet, SiMongodb, SiExpress, SiReact, SiNodedotjs, SiTailwindcss
 } from 'react-icons/si';
 import mypic from './assets/mypic.png';
-import { s } from 'framer-motion/client';
 
 /* ─────────────────────────────────────────────────────────────
    NEON GLOW HELPERS  (inline styles keep Tailwind JIT happy)
@@ -42,7 +41,7 @@ const personalProjects = [
   },
   {
     title: 'A.I.P.E.S',
-    description: 'AllIndiapes – All India Patrakar Ekta Sangh, connecting journalists nationwide through trusted news, media collaboration, and digital press services.   ',
+    description: 'AllIndiapes – All India Patrakar Ekta Sangh, connecting journalists nationwide through trusted news, media collaboration, and digital press services.',
     tech: ['React', 'Node.js', 'Tailwind CSS'],
     link: 'https://allindiapes.vercel.app',
     deployed: true,
@@ -270,13 +269,7 @@ export default function Home() {
         : studentProjects;
 
   const scrollToSection = (id) => {
-    // alert(id);
     document.getElementById(id.toLowerCase())?.scrollIntoView({ behavior: 'smooth' });
-    // setTimeout(() => setIsMenuOpen(false), 300);
-
-    // if(window.innerWidth < 768) {
-    //   setIsMenuOpen(false);
-    // }
   };
 
   const handleSubmit = (e) => {
@@ -306,8 +299,8 @@ export default function Home() {
       {/* ══════════════════════ NAVBAR ══════════════════════ */}
       <nav
         className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${scrolled
-            ? 'bg-gray-900/80 backdrop-blur-xl border-b border-indigo-500/10'
-            : 'bg-transparent'
+          ? 'bg-gray-900/80 backdrop-blur-xl border-b border-indigo-500/10'
+          : 'bg-transparent'
           }`}
         style={{ boxShadow: scrolled ? '0 4px 30px rgba(0,0,0,0.4)' : 'none' }}
       >
@@ -419,7 +412,7 @@ export default function Home() {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
                 </span>
-                <span className="text-green-400 font-medium">Web Developer</span>
+                <span className="text-green-400 font-medium">Web Developer at TechGravis</span>
               </div>
 
               {/* Name */}
@@ -443,6 +436,7 @@ export default function Home() {
                 {[
                   { icon: FaMapMarkerAlt, text: 'Based in Lucknow' },
                   { icon: FaGraduationCap, text: 'B.Tech CSE 2024' },
+                  { icon: FaBuilding, text: 'TechGravis IT Solutions' },
                   { icon: FaChalkboardTeacher, text: 'Ex-Trainer @ Z.N. Infotech' },
                 ].map(({ icon: Icon, text }) => (
                   <span key={text} className="flex items-center gap-1.5">
@@ -567,6 +561,7 @@ export default function Home() {
       </section>
 
       {/* ══════════════════════ JOURNEY ══════════════════════ */}
+      {/* ══════════════════════ JOURNEY ══════════════════════ */}
       <section id="journey" className="relative py-20 md:py-28 px-4 sm:px-6 overflow-hidden">
         <div className="absolute inset-0 bg-gray-800/20" />
         <GridOverlay />
@@ -583,7 +578,7 @@ export default function Home() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, margin: '-80px' }}
-            className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
+            className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"
           >
             {[
               {
@@ -591,35 +586,87 @@ export default function Home() {
                 period: '2020 – 2022',
                 title: 'Video Creator',
                 body: 'Started my creative journey with video shooting and editing. Learned the art of visual storytelling, color grading, and post-production. This foundation taught me attention to detail and creative thinking.',
+                color: 'from-pink-500 to-rose-500'
               },
               {
                 Icon: FaCode,
                 period: '2023 – 2024',
                 title: 'Learning & B.Tech',
                 body: 'Pursued B.Tech CSE from SRIMT, Lucknow. Simultaneously learned Web Development, Python, Android, and Flutter from Z.N. Infotech. Completed my degree in 2024 with focus on full-stack development.',
+                color: 'from-blue-500 to-cyan-500'
               },
               {
                 Icon: FaChalkboardTeacher,
                 period: '2024 – 2025',
                 title: 'Software Trainer',
                 body: 'Became a Software Development Trainer at Z.N. Infotech. Taught 50+ students, conducted 200+ online sessions via Google Meet. Mentored students to build real-world projects.',
+                color: 'from-purple-500 to-indigo-500'
               },
-            ].map(({ Icon, period, title, body }, i) => (
+              {
+                Icon: FaBuilding,
+                period: '2026 – Present',
+                title: 'Web Developer @ TechGravis',
+                body: 'Joined TechGravis IT Solutions Pvt. Ltd. (techgravis.in) as a Web Developer. Working on building and maintaining web applications with a focus on MVC architecture, creating responsive, pixel-perfect user interfaces, and ensuring optimal user experience across all devices.',
+                color: 'from-indigo-500 to-purple-500',
+                isCurrent: true
+              },
+            ].map(({ Icon, period, title, body, color, isCurrent }, i) => (
               <motion.div key={title} variants={fadeItem}>
-                <NeonCard className="h-full p-6 sm:p-7 group">
-                  {/* Icon circle */}
+                <NeonCard className={`h-full p-6 sm:p-7 group ${isCurrent ? 'border-indigo-500/50' : ''}`}>
+                  {/* Icon circle with gradient */}
                   <div
-                    className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5 transition-all duration-300 bg-indigo-500/10 group-hover:bg-indigo-500/20"
-                    style={{ boxShadow: 'inset 0 0 0 1px rgba(99,102,241,0.3)' }}
+                    className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-5 transition-all duration-300 bg-gradient-to-br ${color} bg-opacity-20`}
+                    style={{ boxShadow: isCurrent ? GLOW.indigo : 'inset 0 0 0 1px rgba(99,102,241,0.3)' }}
                   >
-                    <Icon className="text-2xl text-indigo-400" />
+                    <Icon className={`text-2xl ${isCurrent ? 'text-white' : 'text-indigo-400'}`} />
                   </div>
-                  <div className="flex items-center gap-1.5 text-xs text-indigo-400 font-medium mb-2">
-                    <FaCalendarAlt size={10} />
-                    {period}
+
+                  {/* Period */}
+                  <div className="flex items-center gap-1.5 text-xs font-medium mb-2">
+                    <FaCalendarAlt size={10} className="text-indigo-400" />
+                    <span className={`${isCurrent ? 'text-indigo-400' : 'text-gray-400'}`}>{period}</span>
+                    {isCurrent && (
+                      <span className="ml-2 bg-green-500/20 text-green-400 text-[10px] px-2 py-0.5 rounded-full border border-green-500/30">
+                        Current
+                      </span>
+                    )}
                   </div>
-                  <h3 className="text-lg font-bold mb-3">{title}</h3>
+
+                  {/* Title */}
+                  <h3 className={`text-lg font-bold mb-3 ${isCurrent ? 'text-indigo-300' : ''}`}>
+                    {title}
+                  </h3>
+
+                  {/* Body */}
                   <p className="text-gray-400 text-sm leading-relaxed">{body}</p>
+
+                  {/* TechGravis-specific details */}
+                  {isCurrent && (
+                    <div className="mt-4 pt-4 border-t border-indigo-500/20">
+                      <div className="flex flex-wrap gap-2">
+                        <span className="bg-indigo-500/15 border border-indigo-500/30 px-2.5 py-1 rounded-full text-xs text-indigo-300 font-medium">
+                          <FaLaptopCode className="inline mr-1.5 text-[10px]" />
+                          MVC Architecture
+                        </span>
+                        <span className="bg-indigo-500/15 border border-indigo-500/30 px-2.5 py-1 rounded-full text-xs text-indigo-300 font-medium">
+                          <FaCode className="inline mr-1.5 text-[10px]" />
+                          UI Development
+                        </span>
+                        <span className="bg-indigo-500/15 border border-indigo-500/30 px-2.5 py-1 rounded-full text-xs text-indigo-300 font-medium">
+                          <FaUsers className="inline mr-1.5 text-[10px]" />
+                          Team Collaboration
+                        </span>
+                      </div>
+                      <a
+                        href="https://techgravis.in"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 mt-3 text-xs text-indigo-400 hover:text-indigo-300 transition-colors font-medium"
+                      >
+                        Visit techgravis.in <FaExternalLinkAlt size={10} />
+                      </a>
+                    </div>
+                  )}
                 </NeonCard>
               </motion.div>
             ))}
@@ -645,7 +692,7 @@ export default function Home() {
                     impactful web solutions and mentor aspiring developers.
                   </p>
                   <div className="flex flex-wrap gap-2 mt-5">
-                    {['50+ Students Trained', '200+ Online Sessions', '10+ Projects Mentored'].map((tag) => (
+                    {['50+ Students Trained', '200+ Online Sessions', '10+ Projects Mentored', 'TechGravis IT Solutions'].map((tag) => (
                       <span
                         key={tag}
                         className="bg-indigo-500/15 border border-indigo-500/30 px-3 py-1 rounded-full text-xs text-indigo-300 font-medium"
@@ -653,6 +700,91 @@ export default function Home() {
                         {tag}
                       </span>
                     ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </FadeUp>
+
+          {/* Current Role Highlight - TechGravis Details */}
+          <FadeUp delay={0.4} className="mt-8">
+            <div
+              className="rounded-2xl p-6 sm:p-8 border border-indigo-500/30 relative overflow-hidden"
+              style={{
+                background: 'linear-gradient(135deg, rgba(99,102,241,0.15) 0%, rgba(168,85,247,0.10) 100%)',
+                boxShadow: '0 0 50px rgba(99,102,241,0.12)',
+              }}
+            >
+              <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-indigo-400/50 to-transparent" />
+              <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-purple-400/30 to-transparent" />
+
+              <div className="flex flex-col sm:flex-row items-start gap-5">
+                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center flex-shrink-0 shadow-lg shadow-indigo-500/25">
+                  <FaBuilding className="text-2xl text-white" />
+                </div>
+
+                <div className="flex-1">
+                  <div className="flex flex-wrap items-center gap-3 mb-2">
+                    <h3 className="text-xl font-bold text-white">Web Developer</h3>
+                    <span className="bg-green-500/20 text-green-400 text-xs px-3 py-1 rounded-full border border-green-500/30 flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+                      Full-time · Since June 2026
+                    </span>
+                  </div>
+
+                  <p className="text-gray-300 leading-relaxed text-sm sm:text-base">
+                    <span className="font-semibold text-indigo-400 text-base">TechGravis IT Solutions Pvt. Ltd.</span>
+                    {' '}<span className="text-gray-400">(</span>
+                    <a
+                      href="https://techgravis.in"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-indigo-400 hover:text-indigo-300 transition-colors font-medium"
+                    >
+                      techgravis.in
+                    </a>
+                    <span className="text-gray-400">)</span>
+                  </p>
+
+                  <p className="text-gray-400 text-sm leading-relaxed mt-2">
+                    Responsible for building and maintaining web applications with a focus on{' '}
+                    <span className="text-indigo-300 font-medium">MVC architecture</span>, creating responsive and
+                    pixel-perfect user interfaces, and ensuring optimal user experience across all devices.
+                  </p>
+
+                  <div className="flex flex-wrap gap-2 mt-4">
+                    <span className="bg-indigo-500/15 border border-indigo-500/30 px-3 py-1.5 rounded-lg text-xs text-indigo-300 font-medium flex items-center gap-1.5">
+                      <FaCode size={12} />
+                      MVC Architecture
+                    </span>
+                    <span className="bg-indigo-500/15 border border-indigo-500/30 px-3 py-1.5 rounded-lg text-xs text-indigo-300 font-medium flex items-center gap-1.5">
+                      <FaLaptopCode size={12} />
+                      UI Development
+                    </span>
+                    <span className="bg-indigo-500/15 border border-indigo-500/30 px-3 py-1.5 rounded-lg text-xs text-indigo-300 font-medium flex items-center gap-1.5">
+                      <FaUsers size={12} />
+                      Team Collaboration
+                    </span>
+                    <span className="bg-indigo-500/15 border border-indigo-500/30 px-3 py-1.5 rounded-lg text-xs text-indigo-300 font-medium flex items-center gap-1.5">
+                      <FaEnvelope size={12} />
+                      Client Communication
+                    </span>
+                  </div>
+
+                  <div className="mt-4 pt-4 border-t border-gray-700/50 flex flex-wrap items-center gap-4">
+                    <a
+                      href="https://techgravis.in"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-sm text-indigo-400 hover:text-indigo-300 transition-colors font-medium"
+                    >
+                      Visit Company Website <FaExternalLinkAlt size={14} />
+                    </a>
+                    <span className="text-gray-600 text-xs">|</span>
+                    <span className="text-gray-500 text-xs flex items-center gap-1.5">
+                      <FaMapMarkerAlt size={12} className="text-indigo-400" />
+                      Based in Lucknow
+                    </span>
                   </div>
                 </div>
               </div>
@@ -717,8 +849,8 @@ export default function Home() {
                 key={id}
                 onClick={() => setActiveCategory(id)}
                 className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-200 ${activeCategory === id
-                    ? 'bg-indigo-600 text-white'
-                    : 'bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-gray-200'
+                  ? 'bg-indigo-600 text-white'
+                  : 'bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-gray-200'
                   }`}
                 style={activeCategory === id ? { boxShadow: GLOW.indigo } : {}}
               >
@@ -750,7 +882,7 @@ export default function Home() {
                       style={{ background: 'linear-gradient(135deg, rgba(99,102,241,0.4) 0%, rgba(168,85,247,0.4) 100%)' }} />
                     <FaLaptopCode
                       className="text-5xl text-indigo-300/40 group-hover:text-indigo-300/70 transition-all duration-300 group-hover:scale-110 relative z-10"
-                      />
+                    />
                     {/* Year badge */}
                     <span className="absolute top-3 left-3 text-xs text-indigo-300/70 font-mono bg-indigo-900/40 px-2 py-0.5 rounded-full border border-indigo-500/20">
                       {project.year}
@@ -808,8 +940,8 @@ export default function Home() {
                       rel="noopener noreferrer"
                       onClick={(e) => !project.deployed && e.preventDefault()}
                       className={`inline-flex items-center gap-1.5 text-xs font-semibold transition-colors ${project.deployed
-                          ? 'text-indigo-400 hover:text-indigo-300'
-                          : 'text-gray-600 cursor-not-allowed'
+                        ? 'text-indigo-400 hover:text-indigo-300'
+                        : 'text-gray-600 cursor-not-allowed'
                         }`}
                     >
                       {project.deployed ? (
@@ -927,9 +1059,13 @@ export default function Home() {
                     </span>
                     <span className="text-sm">kapil@zninfotech.com</span>
                   </a>
+                  <div className="flex items-center gap-3 text-gray-400 border-t border-gray-700/50 pt-4 mt-2">
+                    <FaBuilding className="text-indigo-400 text-sm" />
+                    <span className="text-sm">TechGravis IT Solutions Pvt. Ltd.</span>
+                  </div>
                 </div>
 
-                <div className="mt-8 pt-6 border-t border-gray-700/50">
+                <div className="mt-6 pt-6 border-t border-gray-700/50">
                   <h4 className="text-sm font-semibold text-gray-400 mb-4 uppercase tracking-wider">Follow Me</h4>
                   <div className="flex gap-4">
                     {[
@@ -1021,6 +1157,9 @@ export default function Home() {
         </p>
         <p className="mt-1.5 flex items-center justify-center gap-1.5 text-gray-600 text-xs">
           Made with <FaHeart className="text-red-500/70 text-xs" /> in Lucknow
+        </p>
+        <p className="mt-0.5 text-gray-700 text-xs">
+          TechGravis IT Solutions Pvt. Ltd.
         </p>
       </footer>
 
